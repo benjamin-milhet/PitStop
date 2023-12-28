@@ -7,11 +7,11 @@
       <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ml-auto"> <!-- Notez ml-auto pour aligner à droite -->
-          <li class="nav-item">
+      <ul class="navbar-nav ml-auto">
+          <li class="nav-item" *ngIf="isLoggedIn">
             <a class="nav-link" href="#" (click)="goToReservations()">Mes réservations</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="isLoggedIn">
             <button class="btn btn-outline-success my-2 my-sm-0" type="button" (click)="logout()">Se déconnecter</button>
           </li>
       </ul>

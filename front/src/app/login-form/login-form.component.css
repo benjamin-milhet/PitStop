@@ -1,0 +1,62 @@
+/* Conteneur global */
+.login-container {
+  max-width: 400px;
+  margin: 5% auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+}
+
+/* Style des champs de saisie */
+.login-container input[type="email"],
+.login-container input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* Style du bouton de soumission */
+.login-container button {
+  width: 100%;
+  background-color: rgb(235, 99, 44);
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.login-container button:hover {
+  color: rgb(235, 99, 44);
+  background-color: white;
+  border: 1px solid rgb(235, 99, 44);
+}
+
+/* Style des messages d'erreur */
+.text-danger {
+  color: #ff3860;
+  font-size: 0.8rem;
+  margin-top: 4px;
+}
+
+/* Style des étiquettes (labels) */
+.login-container label {
+  margin-bottom: 8px;
+  display: inline-block;
+  font-weight: bold;
+}
+
+/* Améliorations responsives */
+@media screen and (max-width: 600px) {
+  .login-container {
+    width: 90%;
+    margin: 10% auto;
+  }
+}

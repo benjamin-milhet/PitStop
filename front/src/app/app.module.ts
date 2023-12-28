@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { Routes } from '@angular/router';
 import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { ReservationFormComponent } from './reservation-form/reservation-form.component';
@@ -11,6 +12,7 @@ import { ReservationTableComponent } from './reservation-table/reservation-table
 import { ReservationComponent } from './reservation/reservation.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AccueilComponent } from './accueil/accueil.component';
+import { LoginFormComponent } from './login-form/login-form.component';
 
 import '@angular/common/locales/global/fr';
 
@@ -22,13 +24,15 @@ import '@angular/common/locales/global/fr';
     ReservationTableComponent,
     ReservationComponent,
     NavbarComponent,
-    AccueilComponent
+    AccueilComponent,
+    LoginFormComponent
   ],
   imports: [
     AppRoutingModule,
     BrowserModule,
     HttpClientModule,
     RouterModule,
+    ReactiveFormsModule,
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr-FR' },

@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
 })
 
 export class NavbarComponent {
+  isLoggedIn = false; 
 
   constructor() { }
 
