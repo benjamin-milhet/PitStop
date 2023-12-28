@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row">
+    <!-- Première rangée de cartes -->
+    <div *ngFor="let room of rooms.slice(0, 4)" class="col-md-3">
+      <div class="card" style="width: 18rem;">
+        <img [src]="room.imageUrl" class="card-img-top" alt="Image de la salle">
+        <div class="card-body">
+          <h5 class="card-title">{{ room.name }}</h5>
+          <p class="card-text">{{ room.description }}</p>
+          <a [routerLink]="['/reservation', room.id]" class="btn btn-primary">Réserver</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <!-- Deuxième rangée de cartes -->
+    <div *ngFor="let room of rooms.slice(4, 8)" class="col-md-3">
+      <div class="card" style="width: 18rem;">
+        <img [src]="room.imageUrl" class="card-img-top" alt="Image de la salle">
+        <div class="card-body">
+          <h5 class="card-title">{{ room.name }}</h5>
+          <p class="card-text">{{ room.description }}</p>
+          <a [routerLink]="['/reservation', room.id]" class="btn btn-primary">Réserver</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+.week-navigation {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.week-navigation button {
+  margin: 0 10px;
+}
+
+.occupied {
+  background-color: red;
+  color: white;
+}

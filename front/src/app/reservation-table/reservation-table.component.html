@@ -1,0 +1,22 @@
+<div class="week-navigation">
+  <button (click)="changeWeek(-1)" class="btn btn-secondary">Semaine précédente</button>
+  <span>{{ currentWeek[0] | date: 'MMMM yyyy' }}</span>
+  <button (click)="changeWeek(1)" class="btn btn-secondary">Semaine suivante</button>
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Heure/Jour</th>
+      <th scope="col" *ngFor="let day of currentWeek">{{ day | date: 'EEE d' }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let hour of hours">
+      <th scope="row">{{ hour }}h</th>
+      <td *ngFor="let day of currentWeek" [ngClass]="{'occupied': isReserved(day, hour), 'free': !isReserved(day, hour)}">
+        {{ isReserved(day, hour) ? 'Occupé' : 'Libre' }}
+      </td>
+    </tr>
+  </tbody>
+</table>
