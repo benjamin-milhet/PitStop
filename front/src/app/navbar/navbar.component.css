@@ -1,20 +1,62 @@
-.navbar-brand {
-  color: rgb(235, 99, 44) !important;
+/* Style général de la barre de navigation */
+.navbar {
+  background-color: #fff; /* Couleur de fond */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre subtile pour une apparence moderne */
+  padding: 0.5rem 1rem; /* Ajustement du padding */
 }
 
+/* Style du logo et du texte de la marque */
+.navbar-brand {
+  color: rgb(235, 99, 44) !important; /* Couleur du texte de la marque */
+  display: flex;
+  align-items: center; /* Centrer le logo et le texte verticalement */
+  font-weight: bold; /* Police en gras */
+}
+
+.navbar-brand img {
+  margin-right: 0.5rem; /* Espace entre le logo et le texte */
+}
+
+/* Style des liens de la barre de navigation */
+.nav-link {
+  color: #555; /* Couleur des liens */
+  margin-right: 1rem; /* Espacement entre les liens */
+  transition: color 0.3s ease-in-out; /* Transition pour l'effet de survol */
+}
+
+.nav-link:hover, .nav-link:focus {
+  color: rgb(235, 99, 44); /* Couleur au survol */
+}
+
+/* Style des boutons */
 .btn-outline-success {
   color: white;
   background-color: rgb(235, 99, 44);
   border-color: rgb(235, 99, 44);
+  transition: all 0.3s ease-in-out; /* Transition pour l'effet de survol */
 }
 
-#navbarNav {
-  display: flex;
-  justify-content: flex-end;
+.btn-outline-success:hover, .btn-outline-success:focus {
+  background-color: rgba(235, 99, 44, 0.8); /* Légère transparence au survol */
+  border-color: rgba(235, 99, 44, 0.8);
 }
 
-.navbar-nav {
-  flex-grow: 1;
-  justify-content: flex-end;
-  margin: 10px;
+/* Styles pour la navigation mobile */
+.navbar-toggler {
+  border-color: rgb(235, 99, 44); /* Couleur de la bordure du bouton hamburger */
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,..."); /* SVG ou image personnalisée pour l'icône */
+}
+
+/* Adaptations pour les écrans plus petits */
+@media (max-width: 992px) {
+  .navbar-nav {
+    margin-top: 0;
+  }
+
+  .nav-link {
+    margin-right: 0; /* Réduit l'espacement sur les petits écrans */
+  }
 }
