@@ -1,10 +1,7 @@
 package com.example.coworking.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -34,7 +31,6 @@ public class User {
     private String login;
     
     @Column(nullable = false)
-    private String token;
-    
+    private String password;
     
 }

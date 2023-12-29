@@ -13,13 +13,15 @@ import org.springframework.stereotype.Service;
 
 import java.nio.CharBuffer;
 
-@Service
+
 @RequiredArgsConstructor
+@Service
 public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final UserMapper userMapper;
     
+
     public UserDto login(CredentialDto credentialDto) {
         User user = this.userRepository.findByLogin(credentialDto.login())
                 .orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));

@@ -21,7 +21,10 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.projectlombok:lombok:1.18.30'
-	implementation 'org.mapstruct:mapstruct:1.4.2.Final'
+	compileOnly 'org.projectlombok:lombok:1.18.30' // Utilisez la dernière version de Lombok
+    annotationProcessor 'org.projectlombok:lombok:1.18.30'
+	implementation 'org.mapstruct:mapstruct:1.4.2.Final' // Utilisez la dernière version disponible
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 
