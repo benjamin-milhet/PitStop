@@ -1,1 +1,6 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
+
+:root {
+  --main-bg-color: rgb(235, 99, 44);
+  --bis-bg-color: rgb(26, 29, 106);
+}

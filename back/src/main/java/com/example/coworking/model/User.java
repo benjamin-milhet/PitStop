@@ -28,9 +28,6 @@ public class User {
     private String tel;
     
     @Column(nullable = false)
-    private String login;
-    
-    @Column(nullable = false)
     private String password;
     
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
+import { RegisterService } from '../register.service';
 
 @Component({
   selector: 'app-login-form',
@@ -9,19 +10,32 @@ import { AuthService } from '../auth.service';
 })
 export class LoginFormComponent implements OnInit {
   loginForm: FormGroup;
+  registerForm: FormGroup;
+  activeTab: string = 'login';
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService) {
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private registerService: RegisterService) {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]]
     });
+    this.registerForm = this.formBuilder.group({
+      firstName: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      tel: ['', [Validators.required]],
+      password: ['', [Validators.required, Validators.minLength(12), this.passwordStrengthValidator]],
+      confirmPassword: ['', [Validators.required]]
+    }, {
+      validator: this.mustMatch('password', 'confirmPassword')
+    });
+
   }
 
   ngOnInit() {
     
   }
 
-  onSubmit() {
+  onSubmitLogin() {
     if (this.loginForm.invalid) {
       return;
     }
@@ -40,4 +54,60 @@ export class LoginFormComponent implements OnInit {
       }
       );
   }
+
+  onSubmitRegister() {
+    if (this.registerForm.invalid) {
+      return;
+    }
+
+    const registerData = this.registerForm.value;
+    console.log(registerData);
+
+    this.registerService.register(registerData).subscribe(
+      data => {
+        console.log('Connexion réussie', data);
+        // Gérer la réussite de la connexion ici (par exemple, enregistrement du token, redirection, etc.)
+      },
+      error => {
+        console.error('Erreur de connexion', error);
+        // Gérer l'échec de la connexion ici
+      }
+      );
+  }
+
+  private passwordStrengthValidator(control: AbstractControl): ValidationErrors | null {
+    const value = control.value;
+    if (!value) {
+      return null;
+    }
+
+    const hasUpperCase = /[A-Z]+/.test(value);
+    const hasLowerCase = /[a-z]+/.test(value);
+    const hasNumeric = /[0-9]+/.test(value);
+    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]+/.test(value);
+
+    const passwordValid = hasUpperCase && hasLowerCase && hasNumeric && hasSpecialChar;
+    return !passwordValid ? { passwordStrength: true } : null;
+  }
+
+  private mustMatch(passwordRegisterField: string, confirmPasswordField: string) {
+    return (formGroup: FormGroup) => {
+      const password = formGroup.controls[passwordRegisterField];
+      const confirmPassword = formGroup.controls[confirmPasswordField];
+
+      if (confirmPassword.errors && !confirmPassword.errors['mustMatch']) {
+        // Return if another validator has already found an error on the confirmPassword
+        return;
+      }
+
+      // Set error on confirmPassword if validation fails
+      if (password.value !== confirmPassword.value) {
+        confirmPassword.setErrors({ mustMatch: true });
+      } else {
+        confirmPassword.setErrors(null);
+      }
+    };
+  }
+
+
 }

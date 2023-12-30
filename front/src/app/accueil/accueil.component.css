@@ -8,6 +8,6 @@
 
 .btn-primary {
   color: white;
-  background-color: rgb(26, 29, 106);
-  border-color: rgb(26, 29, 106);
+  background-color: var(--bis-bg-color);
+  border-color: var(--bis-bg-color);
 }
