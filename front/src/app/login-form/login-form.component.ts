@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { RegisterService } from '../register.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login-form',
@@ -13,7 +14,7 @@ export class LoginFormComponent implements OnInit {
   registerForm: FormGroup;
   activeTab: string = 'login';
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService, private registerService: RegisterService) {
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private registerService: RegisterService, private router: Router) {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]]
@@ -32,7 +33,7 @@ export class LoginFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+
   }
 
   onSubmitLogin() {
@@ -46,11 +47,16 @@ export class LoginFormComponent implements OnInit {
     this.authService.login(loginData).subscribe(
       data => {
         console.log('Connexion réussie', data);
-        // Gérer la réussite de la connexion ici (par exemple, enregistrement du token, redirection, etc.)
+        this.authService.saveToken(data.token);
+
+        this.router.navigate(['/accueil']).then(success => {
+          console.log('Navigation réussie:', success);
+        }).catch(err => {
+          console.error('Erreur de navigation:', err);
+        });
       },
       error => {
         console.error('Erreur de connexion', error);
-        // Gérer l'échec de la connexion ici
       }
       );
   }
@@ -66,7 +72,6 @@ export class LoginFormComponent implements OnInit {
     this.registerService.register(registerData).subscribe(
       data => {
         console.log('Connexion réussie', data);
-        // Gérer la réussite de la connexion ici (par exemple, enregistrement du token, redirection, etc.)
       },
       error => {
         console.error('Erreur de connexion', error);

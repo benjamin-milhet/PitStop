@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Room } from '../model/room.model';
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-accueil',

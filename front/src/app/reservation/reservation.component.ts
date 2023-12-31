@@ -14,7 +14,6 @@ export class ReservationComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private reservationService: ReservationService
   ) {
     console.log('ReservationComponent constructor');
    }
