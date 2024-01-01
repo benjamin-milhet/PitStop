@@ -7,19 +7,26 @@ import { Observable } from 'rxjs';
 })
 export class ReservationService {
 
-  private baseUrl = 'http://localhost:8081/api/auth/reservations'; // L'URL de votre API
+  private baseUrl = 'http://localhost:8081/api/user/reservations';
 
   constructor(private http: HttpClient) { }
 
   getReservations(): Observable<any> {
-    return this.http.get(`${this.baseUrl}`);
+    return this.http.request('get', this.baseUrl, {
+      withCredentials: true,
+      responseType : "text"
+    });
   }
 
   getReservationsForWeek(startOfWeek: Date): Observable<Reservation[]> {
     console.log('startOfWeek', startOfWeek);
     console.log(this.baseUrl + '/week');
-    return this.http.post<Reservation[]>(this.baseUrl + '/week', startOfWeek);;
+    return this.http.request<Reservation[]>('post', this.baseUrl + '/week', {
+      body: startOfWeek,
+      withCredentials: true,
+    });
   }
+
 }
 
 interface Reservation {

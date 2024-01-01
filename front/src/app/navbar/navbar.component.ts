@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AuthService} from "../service/auth.service";
 import {FormBuilder} from "@angular/forms";
 import {Router} from "@angular/router";
@@ -10,7 +10,7 @@ import {Subscription} from "rxjs";
   styleUrls: ['./navbar.component.css']
 })
 
-export class NavbarComponent implements OnInit{
+export class NavbarComponent implements OnInit, OnDestroy {
   isLoggedIn = false;
   AuthUserSub! : Subscription;
 
@@ -25,6 +25,10 @@ export class NavbarComponent implements OnInit{
         }
       }
     })
+  }
+
+  ngOnDestroy(): void {
+    this.AuthUserSub.unsubscribe();
   }
 
   goToReservations() {

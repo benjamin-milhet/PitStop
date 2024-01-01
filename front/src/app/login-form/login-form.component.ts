@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { AuthService } from '../service/auth.service';
 import { RegisterService } from '../service/register.service';
@@ -10,7 +10,7 @@ import {Subscription} from "rxjs";
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.css']
 })
-export class LoginFormComponent implements OnInit {
+export class LoginFormComponent implements OnInit, OnDestroy {
   loginForm: FormGroup;
   registerForm: FormGroup;
   activeTab: string = 'login';
@@ -44,6 +44,10 @@ export class LoginFormComponent implements OnInit {
         }
       }
     })
+  }
+
+  ngOnDestroy() {
+    this.AuthUserSub.unsubscribe();
   }
 
   onSubmitLogin() {
