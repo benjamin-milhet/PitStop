@@ -4,6 +4,7 @@ import com.example.coworking.model.Reservation;
 import com.example.coworking.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,7 +17,8 @@ import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.POST})
 @RestController
-@RequestMapping("/api/reservations")
+@RequestMapping("/api/auth/reservations")
+//@PreAuthorize("hasAnyRole('ADMIN','USER')")
 public class ReservationController {
 
     @Autowired
@@ -28,6 +30,7 @@ public class ReservationController {
     }
 
     @GetMapping("/available")
+    //@PreAuthorize("hasAuthority('READ_PRIVILEGE') and hasRole('USER')")
     public boolean isAvailable(
             @RequestParam("start") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start,
             @RequestParam("endTime") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endTime) {
@@ -35,6 +38,7 @@ public class ReservationController {
     }
 
     @PostMapping("/week")
+    //@PreAuthorize("hasAuthority('READ_PRIVILEGE') and hasRole('USER')")
     public List<Reservation> getReservationsForWeek(@RequestBody String startOfWeek) {
         Instant instant = Instant.parse(startOfWeek.replace("\"", ""));
         LocalDateTime start = LocalDateTime.ofInstant(instant, ZoneOffset.UTC);

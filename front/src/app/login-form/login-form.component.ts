@@ -52,8 +52,6 @@ export class LoginFormComponent implements OnInit {
     }
 
     const loginData = this.loginForm.value;
-    console.log(loginData);
-
     const email = loginData.email;
     const password = loginData.password;
 

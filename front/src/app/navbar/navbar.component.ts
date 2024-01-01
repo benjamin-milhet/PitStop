@@ -28,7 +28,7 @@ export class NavbarComponent implements OnInit{
   }
 
   goToReservations() {
-    // Code pour aller à la page des réservations
+    console.log("test")
   }
 
   logout() {

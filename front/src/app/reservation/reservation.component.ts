@@ -15,7 +15,6 @@ export class ReservationComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
   ) {
-    console.log('ReservationComponent constructor');
    }
 
   ngOnInit(): void {

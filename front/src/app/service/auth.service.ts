@@ -21,6 +21,7 @@ export class AuthService {
   private loginUrl = 'http://localhost:8081/api/auth/login';
   private logoutUrl = 'http://localhost:8081/api/auth/logout';
   private refreshTokenURL = 'http://localhost:8081/api/auth/refresh-token';
+  private infoUrl = 'http://localhost:8081/api/auth/info';
   AuthenticatedUser$  = new BehaviorSubject<User | null>(null);
 
   constructor(private http: HttpClient, private storageService: StorageService, private router:Router) {}
@@ -57,6 +58,14 @@ export class AuthService {
         }
       )
     );
+  }
+
+  autoLogin() {
+    const userData = this.storageService.getSavedUser();
+    if (!userData) {
+      return;
+    }
+    this.AuthenticatedUser$.next(userData);
   }
 
   logout(){

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ReservationService } from '../service/reservation.service';
-import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-reservation-table',
@@ -36,8 +35,10 @@ export class ReservationTableComponent implements OnInit {
 
     data.forEach((reservation: Reservation) => {
       console.log(reservation);
-      const startDate = convertToValidDate(reservation.start);
-      const endDate = convertToValidDate(reservation.endTime);
+      console.log(reservation.start);
+      console.log(reservation.endTime);
+      const startDate = new Date(Number(reservation.start[0]), Number(reservation.start[1]) - 1, Number(reservation.start[2]), Number(reservation.start[3]), Number(reservation.start[4]));
+      const endDate = new Date(Number(reservation.endTime[0]), Number(reservation.endTime[1]) - 1, Number(reservation.endTime[2]), Number(reservation.endTime[3]), Number(reservation.endTime[4]));
 
       if(isNaN(startDate.getTime()) || isNaN(endDate.getTime())) {
         console.error('Date invalide:', reservation);
