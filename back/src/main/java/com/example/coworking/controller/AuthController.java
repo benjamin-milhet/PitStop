@@ -1,48 +1,41 @@
 package com.example.coworking.controller;
 
-import com.example.coworking.config.UserAuthenticationProvider;
-import com.example.coworking.dto.CredentialDto;
-import com.example.coworking.dto.SignUpDto;
-import com.example.coworking.dto.UserDto;
-import com.example.coworking.service.UserService;
-import jakarta.servlet.http.HttpServletRequest;
+import com.example.coworking.payload.request.AuthenticationRequest;
+import com.example.coworking.payload.request.RefreshTokenRequest;
+import com.example.coworking.payload.request.RegisterRequest;
+import com.example.coworking.payload.response.AuthenticationResponse;
+import com.example.coworking.payload.response.RefreshTokenResponse;
+import com.example.coworking.service.AuthenticationService;
+import com.example.coworking.service.RefreshTokenService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.net.URI;
 
 
 @RestController
+@RequestMapping("/api/auth")
 @RequiredArgsConstructor
 public class AuthController {
-    
-    private final UserService userService;
-    private final UserAuthenticationProvider userAuthenticationProvider;
+
+    private final AuthenticationService authenticationService;
+    private final RefreshTokenService refreshTokenService;
 
     @PostMapping("/login")
-    public ResponseEntity<UserDto> login(@RequestBody CredentialDto credentialDto) {
-        UserDto userDto = userService.login(credentialDto);
-        return ResponseEntity.ok(userDto);
+    public ResponseEntity<AuthenticationResponse> login(@RequestBody AuthenticationRequest request) {
+        return ResponseEntity.ok(authenticationService.authenticate(request));
     }
 
     @PostMapping("/register")
-    public ResponseEntity<UserDto> register(@RequestBody SignUpDto user) {
-        UserDto createdUser = userService.register(user);
-        createdUser.setToken(userAuthenticationProvider.createToken(createdUser));
-        return ResponseEntity.created(URI.create("/users/" + createdUser.getId())).body(createdUser);
+    public ResponseEntity<AuthenticationResponse> register(@Valid @RequestBody RegisterRequest request) {
+        return ResponseEntity.ok(authenticationService.register(request));
     }
 
-    @GetMapping("/verify-token")
-    public ResponseEntity<?> verifyToken(HttpServletRequest request) {
-        try {
-            return ResponseEntity.ok().build();
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
+    @PostMapping("/refresh-token")
+    public ResponseEntity<RefreshTokenResponse> refreshToken(@RequestBody RefreshTokenRequest request) {
+        return ResponseEntity.ok(refreshTokenService.generateNewToken(request));
     }
 }

@@ -14,6 +14,7 @@ import { AccueilComponent } from './accueil/accueil.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 
 import '@angular/common/locales/global/fr';
+import { AccessDeniedComponent } from './errors/access-denied/access-denied.component';
 
 @NgModule({
 
@@ -24,7 +25,8 @@ import '@angular/common/locales/global/fr';
     ReservationComponent,
     NavbarComponent,
     AccueilComponent,
-    LoginFormComponent
+    LoginFormComponent,
+    AccessDeniedComponent
   ],
   imports: [
     AppRoutingModule,

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ReservationService } from '../reservation.service';
+import { ReservationService } from '../service/reservation.service';
 import { DatePipe } from '@angular/common';
 
 @Component({

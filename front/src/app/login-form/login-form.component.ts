@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-import { AuthService } from '../auth.service';
-import { RegisterService } from '../register.service';
+import { AuthService } from '../service/auth.service';
+import { RegisterService } from '../service/register.service';
 import {Router} from "@angular/router";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-login-form',
@@ -13,6 +14,9 @@ export class LoginFormComponent implements OnInit {
   loginForm: FormGroup;
   registerForm: FormGroup;
   activeTab: string = 'login';
+
+  errorMessage! : string;
+  AuthUserSub! : Subscription;
 
   constructor(private formBuilder: FormBuilder, private authService: AuthService, private registerService: RegisterService, private router: Router) {
     this.loginForm = this.formBuilder.group({
@@ -33,7 +37,13 @@ export class LoginFormComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.AuthUserSub = this.authService.AuthenticatedUser$.subscribe({
+      next : user => {
+        if(user) {
+          this.router.navigate(['/accueil']);
+        }
+      }
+    })
   }
 
   onSubmitLogin() {
@@ -44,21 +54,19 @@ export class LoginFormComponent implements OnInit {
     const loginData = this.loginForm.value;
     console.log(loginData);
 
-    this.authService.login(loginData).subscribe(
-      data => {
-        console.log('Connexion réussie', data);
-        this.authService.saveToken(data.token);
+    const email = loginData.email;
+    const password = loginData.password;
 
-        this.router.navigate(['/accueil']).then(success => {
-          console.log('Navigation réussie:', success);
-        }).catch(err => {
-          console.error('Erreur de navigation:', err);
-        });
+    this.authService.login(email, password).subscribe({
+      next : userData => {
+        this.router.navigate(['/accueil']);
       },
-      error => {
-        console.error('Erreur de connexion', error);
+      error : err => {
+        this.errorMessage = err;
+        console.log(err);
       }
-      );
+
+    })
   }
 
   onSubmitRegister() {
