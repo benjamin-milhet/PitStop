@@ -1,19 +1,21 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">
-      <img src="assets/images/logo.jpeg" width="60" height="60" alt="logo">
-      Coworking
-  </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ml-auto">
-          <li class="nav-item" *ngIf="isLoggedIn">
-            <a class="nav-link" href="#" (click)="goToReservations()">Mes réservations</a>
-          </li>
-          <li class="nav-item" *ngIf="isLoggedIn">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="button" (click)="logout()">Se déconnecter</button>
-          </li>
-      </ul>
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+        <img src="assets/images/logo.jpg" width="60" height="60" alt="logo">
+        PitStop
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse flex-container" id="navbarNav">
+        <ul class="ml-auto navbar-nav">
+            <li class="nav-item" *ngIf="isLoggedIn">
+              <a class="nav-link" href="#" (click)="goToReservations()">Mes réservations</a>
+            </li>
+            <li class="nav-item" *ngIf="isLoggedIn">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="button" (click)="logout()">Se déconnecter</button>
+            </li>
+        </ul>
+    </div>
   </div>
 </nav>

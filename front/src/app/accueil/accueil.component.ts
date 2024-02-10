@@ -9,10 +9,10 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class AccueilComponent {
   rooms: Room[] = [
-    { id: 1, name: 'Salle 1', description: 'Description de la Salle 1', imageUrl: 'assets/images/img1.jpeg' },
-    { id: 2, name: 'Salle 2', description: 'Description de la Salle 2', imageUrl: 'assets/images/img1.jpeg' },
-    { id: 3, name: 'Salle 3', description: 'Description de la Salle 3', imageUrl: 'assets/images/img1.jpeg' },
-    { id: 4, name: 'Salle 4', description: 'Description de la Salle 4', imageUrl: 'assets/images/img1.jpeg' },
-    { id: 5, name: 'Salle 5', description: 'Description de la Salle 5', imageUrl: 'assets/images/img1.jpeg' },
-    { id: 6, name: 'Salle 6', description: 'Description de la Salle 6', imageUrl: 'assets/images/img1.jpeg' },  ];
+    { id: 1, name: 'Circuit de Monaco', description: 'Monaco', imageUrl: 'assets/images/monaco.jpg' },
+    { id: 2, name: 'Circuit Bugatti', description: 'Le Mans - France', imageUrl: 'assets/images/mans.jpg' },
+    { id: 3, name: 'Circuit Paul Ricard', description: 'Le Castellet - France', imageUrl: 'assets/images/france.jpg' },
+    { id: 4, name: 'Circuit de Silverstone', description: 'Royaume-Uni', imageUrl: 'assets/images/silverstone.jpg' },
+    { id: 5, name: 'Autodromo di Monza', description: 'Italie', imageUrl: 'assets/images/monza.jpg' },
+    { id: 6, name: 'Circuit de Suzuka', description: 'Japon', imageUrl: 'assets/images/suzuka.jpg' },  ];
 }

@@ -50,6 +50,10 @@
   background-image: url("data:image/svg+xml,..."); /* SVG ou image personnalisée pour l'icône */
 }
 
+.navbar-collapse {
+  flex-grow: 0;;
+}
+
 /* Adaptations pour les écrans plus petits */
 @media (max-width: 992px) {
   .navbar-nav {
